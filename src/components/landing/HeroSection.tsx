@@ -114,7 +114,7 @@ export default function HeroSection() {
         >
           우리가 만나기 전,
           <br />
-          너는 어떤 모습이었을까?
+          <span className="text-warm-brown">너는 어떤 모습이었을까?</span>
         </motion.h1>
 
         {/* Sub copy */}
