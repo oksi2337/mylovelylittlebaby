@@ -16,7 +16,7 @@ const config: Config = {
         "soft-brown": "#C4A882",
       },
       fontFamily: {
-        serif: ["Pretendard Variable", "Pretendard", "sans-serif"],
+        serif: ["Helvetica", "Arial", "sans-serif"],
         sans: ["Pretendard Variable", "Pretendard", "system-ui", "sans-serif"],
       },
       borderRadius: {
