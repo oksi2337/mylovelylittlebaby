@@ -73,7 +73,7 @@ export default function SolutionSection() {
                 <h3 className="font-serif text-lg md:text-xl text-deep-brown font-semibold mb-2.5 leading-snug">
                   {card.title}
                 </h3>
-                <p className="text-soft-brown text-[0.925rem] leading-[1.9]">{card.desc}</p>
+                <p className="text-soft-brown text-[0.925rem] leading-[1.9]" style={{ fontFamily: '"Nanum Myeongjo", Georgia, serif' }}>{card.desc}</p>
               </div>
             </motion.div>
           ))}
