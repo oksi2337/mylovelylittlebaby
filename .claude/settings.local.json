@@ -12,7 +12,9 @@
       "Bash(git commit -m ' *)",
       "Bash(git push *)",
       "Skill(update-config)",
-      "Bash(bash -c 'git add -A; git diff --cached --quiet || git commit -m \"auto: update files\"; git push origin main 2>/dev/null || true')"
+      "Bash(bash -c 'git add -A; git diff --cached --quiet || git commit -m \"auto: update files\"; git push origin main 2>/dev/null || true')",
+      "Bash(vercel *)",
+      "Bash(npm i *)"
     ]
   }
 }
