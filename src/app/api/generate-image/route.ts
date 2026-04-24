@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
     const results = await Promise.all(promises);
     const images = results
       .flat()
-      .filter((url): url is string => typeof url === 'string' && Boolean(url));
+      .filter((url): url is string => url !== null && typeof url === 'string');
 
     return NextResponse.json({ images, id: generateId() });
   } catch (error) {
