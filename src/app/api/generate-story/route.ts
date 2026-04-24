@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { openai } from '@/lib/openai';
+import { replicate } from '@/lib/replicate';
 import type { PetInfo, Plan } from '@/types';
 
 const SYSTEM_PROMPT = `
@@ -15,7 +15,7 @@ const SYSTEM_PROMPT = `
 - 전체 400~600자 이내
 - 마지막에 보호자에게 전하는 한 문장으로 마무리
 
-출력 형식 (JSON):
+반드시 아래 JSON 형식으로만 응답하세요. 다른 말 없이 JSON만 출력하세요:
 {
   "title": "짧은 제목 (최대 20자)",
   "story": "본문 스토리 (300~500자)",
@@ -33,9 +33,21 @@ export interface StoryResult {
   shareText: string;
 }
 
+function buildFallbackStory(petInfo: PetInfo): StoryResult {
+  const name = petInfo.name;
+  const petType = petInfo.type === 'dog' ? '강아지' : petInfo.type === 'cat' ? '고양이' : '반려동물';
+  return {
+    title: `${name}의 기다림`,
+    story: `${name}는 세상에 태어난 첫날부터 따뜻한 손길을 기다렸어요. 작은 발로 이 세상을 탐험하며, 언젠가 만날 소중한 사람을 꿈꿨답니다. 봄볕이 따사로운 어느 날, 살랑이는 바람 속에서 ${name}는 행복한 미래를 그렸어요. 세상이 아직 낯설고 두렵던 그 시절에도, ${name}의 마음속엔 언제나 당신을 향한 자리가 있었답니다.`,
+    wishMessage: `만약 그때 만났다면, 함께한 모든 순간이 지금보다 더욱 빛났을 거예요.`,
+    closingLine: `지금 이 순간, 당신 곁에 있어 행복해요.`,
+    shareText: `${name}와 나의 소중한 어린 시절 이야기 🐾`,
+  };
+}
+
 export async function POST(req: NextRequest) {
   try {
-    const { petInfo, plan } = (await req.json()) as {
+    const { petInfo } = (await req.json()) as {
       petInfo: PetInfo;
       plan: Plan;
     };
@@ -52,23 +64,26 @@ export async function POST(req: NextRequest) {
 - 보호자 메시지: ${petInfo.messageFromOwner || '없음'}
     `.trim();
 
-    const response = await openai.chat.completions.create({
-      model: 'gpt-4o',
-      messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
-        { role: 'user', content: userPrompt },
-      ],
-      response_format: { type: 'json_object' },
-      temperature: 0.8,
-    });
+    try {
+      const output = await replicate.run('meta/meta-llama-3-8b-instruct', {
+        input: {
+          prompt: `${SYSTEM_PROMPT}\n\n${userPrompt}`,
+          max_new_tokens: 1024,
+          temperature: 0.8,
+        },
+      });
 
-    const raw = response.choices[0]?.message?.content;
-    if (!raw) {
-      return NextResponse.json({ error: 'No story generated' }, { status: 500 });
+      const raw = Array.isArray(output) ? (output as string[]).join('') : String(output);
+      const jsonMatch = raw.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        const story = JSON.parse(jsonMatch[0]) as StoryResult;
+        return NextResponse.json({ story });
+      }
+    } catch (llmError) {
+      console.error('LLM generation error, using fallback:', llmError);
     }
 
-    const story: StoryResult = JSON.parse(raw);
-    return NextResponse.json({ story });
+    return NextResponse.json({ story: buildFallbackStory(petInfo) });
   } catch (error) {
     console.error('Story generation error:', error);
     return NextResponse.json({ error: 'Story generation failed' }, { status: 500 });
