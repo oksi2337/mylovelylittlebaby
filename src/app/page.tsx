@@ -27,8 +27,8 @@ export default function LandingPage() {
 
       <footer className="bg-cream border-t border-beige py-10 px-4">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-soft-brown text-sm">
-          <p className="font-serif text-deep-brown font-medium">베이비펫</p>
-          <p>© 2026 베이비펫. 반려동물의 잃어버린 시간을 복원합니다.</p>
+          <p className="font-serif text-deep-brown font-medium">BabyPet</p>
+          <p>© 2026 BabyPet. 반려동물의 잃어버린 시간을 복원합니다.</p>
           <p className="text-xs text-soft-brown/60">
             🐾 수익의 2%가 유기동물 보호에 기부됩니다
           </p>
