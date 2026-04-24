@@ -44,7 +44,7 @@ export default function DonationSection() {
               유기동물 보호를 위해 기부됩니다
             </h2>
             <p className="text-soft-brown text-[0.95rem] leading-[1.9] max-w-lg mx-auto">
-              베이비펫을 이용할 때마다 유기동물 보호 단체에 소정의 금액이 자동으로
+              BabyPet을 이용할 때마다 유기동물 보호 단체에 소정의 금액이 자동으로
               기부됩니다. 아이의 아기 시절을 만나면서 동시에 또 다른 아이들의 미래를
               함께 만들어가세요.
             </p>
