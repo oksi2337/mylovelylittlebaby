@@ -4,24 +4,24 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import Link from 'next/link';
 
-const CARDS = [
+const CARDS: { icon: string; iconBg: string; title: string; desc: React.ReactNode }[] = [
   {
     icon: '✨',
     iconBg: 'bg-amber-50',
     title: '지금의 모습으로 그려내는 어린 시절',
-    desc: '현재 아이의 눈빛, 털색, 고유한 특징을 AI가 정밀 분석하여, 단 한 번도 본 적 없는 가장 자연스럽고 사랑스러운 아기 시절의 모습을 재현합니다.',
+    desc: <>현재 아이의 눈빛, 털색, 고유한 특징을 AI가 정밀 분석하여, 단 한 번도 본 적 없는 가장 자연스럽고<br />사랑스러운 아기 시절의 모습을 재현합니다.</>,
   },
   {
     icon: '✍️',
     iconBg: 'bg-warm-brown/8',
     title: '만약 그때 만났다면 들려줬을 이야기',
-    desc: '"그때 만났다면 어떤 하루를 보냈을까?"라는 상상에서 시작된 따뜻한 편지와 이야기를 함께 담아드립니다. 이미지 그 이상의 깊은 감동을 경험해 보세요.',
+    desc: <>"그때 만났다면 어떤 하루를 보냈을까?"라는 상상에서 시작된 따뜻한 편지와 이야기를 함께 담아드립니다.<br />이미지 그 이상의 깊은 감동을 경험해 보세요.</>,
   },
   {
     icon: '🎁',
     iconBg: 'bg-green-50',
     title: '영원히 간직될 우리만의 첫 번째 추억',
-    desc: '복원된 이미지와 스토리는 고화질 디지털 카드로 제작되어 언제든 꺼내 볼 수 있으며, 결제 금액의 일부는 다른 유기동물들을 위한 기부금으로 소중히 사용됩니다.',
+    desc: <>복원된 이미지와 스토리는 고화질 디지털 카드로 제작되어 언제든 꺼내 볼 수 있으며,<br />결제 금액의 일부는 다른 유기동물들을 위한 기부금으로 소중히 사용됩니다.</>,
   },
 ];
 
