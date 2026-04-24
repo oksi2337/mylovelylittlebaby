@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@tosspayments/payment-sdk": "^1.9.2",
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.8",
     "html2canvas": "^1.4.1",
