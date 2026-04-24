@@ -40,8 +40,8 @@ export async function POST(req: NextRequest) {
     );
 
     const results = await Promise.all(promises);
-    const images = (results.flat().filter(url => !!url) as string[])
-      .map(url => url.toString());
+    const flatResults = results.flat() as any[];
+    const images = flatResults.map(url => String(url)).filter(url => !!url);
 
     return NextResponse.json({ images, id: generateId() });
   } catch (error) {
