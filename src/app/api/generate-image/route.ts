@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { openai } from '@/lib/openai';
+import { replicate } from '@/lib/replicate';
 import { generateId } from '@/lib/utils';
 import type { PetInfo, Plan } from '@/types';
 
@@ -25,24 +25,24 @@ export async function POST(req: NextRequest) {
     };
 
     const imageCount = plan === 'premium' ? 3 : 1;
-    const quality = plan === 'premium' ? 'hd' : 'standard';
     const prompt = buildImagePrompt(petInfo);
 
     const promises = Array.from({ length: imageCount }, () =>
-      openai.images.generate({
-        model: 'dall-e-3',
-        prompt,
-        size: '1024x1024',
-        quality,
-        style: 'natural',
-        response_format: 'url',
+      replicate.run('black-forest-labs/flux-schnell', {
+        input: {
+          prompt,
+          num_outputs: 1,
+          aspect_ratio: '1:1',
+          output_format: 'webp',
+          output_quality: 90,
+        },
       }),
     );
 
     const results = await Promise.all(promises);
     const images = results
-      .map((r) => r.data?.[0]?.url)
-      .filter((url): url is string => Boolean(url));
+      .flat()
+      .filter((url): url is string => typeof url === 'string' && Boolean(url));
 
     return NextResponse.json({ images, id: generateId() });
   } catch (error) {
