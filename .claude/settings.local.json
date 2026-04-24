@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(npx next *)",
+      "Bash(node -e \"const p = require\\('./node_modules/react/package.json'\\); console.log\\('react:', p.version\\)\")",
+      "Bash(node -e \"const p = require\\('./node_modules/next/package.json'\\); console.log\\('next:', p.version\\)\")",
+      "Bash(npx tsc *)",
+      "Bash(node *)",
+      "Bash(npm uninstall *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Skill(update-config)",
+      "Bash(bash -c 'git add -A; git diff --cached --quiet || git commit -m \"auto: update files\"; git push origin main 2>/dev/null || true')"
+    ]
+  }
+}
