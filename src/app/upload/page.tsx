@@ -33,14 +33,23 @@ export default function UploadPage() {
     <div className="min-h-screen bg-cream">
       <div className="max-w-lg mx-auto px-4 pt-8 pb-24">
 
-        {/* ── Back link ── */}
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1.5 text-soft-brown text-sm hover:text-warm-brown transition-colors mb-6"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          처음으로
-        </Link>
+        {/* ── Top row: back + donation badge ── */}
+        <div className="flex items-center justify-between mb-6">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 text-soft-brown text-sm hover:text-warm-brown transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            처음으로
+          </Link>
+
+          <div className="flex items-center justify-center w-16 h-16 rounded-full bg-warm-brown/10 border border-warm-brown/20">
+            <div className="text-center leading-tight">
+              <p className="text-warm-brown font-semibold text-xs">2%</p>
+              <p className="text-warm-brown text-[10px]">기부중</p>
+            </div>
+          </div>
+        </div>
 
         {/* ── Step indicator ── */}
         <StepIndicator currentStep={1} totalSteps={3} labels={['사진 업로드', '정보 입력', '플랜 선택']} />
