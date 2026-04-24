@@ -57,7 +57,7 @@ export default function Header() {
           href="/"
           className="font-serif text-xl text-deep-brown font-semibold tracking-tight hover:text-warm-brown transition-colors"
         >
-          BabyPet
+          🐾🐾 BabyPet
         </Link>
 
         {/* Desktop nav */}
