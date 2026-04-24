@@ -38,7 +38,7 @@ function FloatQuote({ text, index }: { text: string; index: number }) {
       transition={{ duration: 0.85, delay: index * 0.08, ease }}
       className="py-10 md:py-12 border-b border-soft-brown/10 last:border-0"
     >
-      <blockquote className="font-serif text-xl md:text-[1.65rem] text-deep-brown/75 text-center leading-relaxed tracking-tight">
+      <blockquote className="font-serif text-xl md:text-[1.65rem] text-deep-brown/75 text-center leading-relaxed tracking-tight" style={{ fontFamily: '"Nanum Myeongjo", Georgia, serif' }}>
         <span className="text-soft-brown/50 text-3xl align-top leading-none mr-1.5">"</span>
         {text}
         <span className="text-soft-brown/50 text-3xl align-bottom leading-none ml-1.5">"</span>
