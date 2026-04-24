@@ -43,8 +43,8 @@ export default function UploadPage() {
             처음으로
           </Link>
 
-          <div className="flex items-center justify-center w-16 h-16 rounded-full bg-warm-brown/10 border border-warm-brown/20">
-            <div className="text-center leading-tight">
+          <div className="flex items-center justify-center w-16 h-16 rounded-full bg-beige">
+            <div className="text-center leading-tight" style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}>
               <p className="text-warm-brown font-semibold text-xs">2%</p>
               <p className="text-warm-brown text-[10px]">기부중</p>
             </div>
