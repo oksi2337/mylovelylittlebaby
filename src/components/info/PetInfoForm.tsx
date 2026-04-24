@@ -153,15 +153,16 @@ function AdoptedDatePicker({
   value?: string;
   onChange: (v: string | undefined) => void;
 }) {
-  const [year, month] = (value ?? '').split('-');
+  const [year, setYear] = useState(() => value?.split('-')[0] ?? '');
+  const [month, setMonth] = useState(() => value?.split('-')[1] ?? '');
 
-  const update = (newYear: string, newMonth: string) => {
-    if (newYear && newMonth) {
-      onChange(`${newYear}-${newMonth.padStart(2, '0')}`);
+  useEffect(() => {
+    if (year && month) {
+      onChange(`${year}-${month}`);
     } else {
       onChange(undefined);
     }
-  };
+  }, [year, month]);
 
   const selectClass = cn(
     'flex-1 bg-beige border border-soft-brown/25 rounded-2xl px-4 py-2.5',
@@ -182,20 +183,20 @@ function AdoptedDatePicker({
       <div className="flex gap-3">
         <select
           className={selectClass}
-          value={year ?? ''}
-          onChange={(e) => update(e.target.value, month ?? '')}
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
           aria-label="입양 연도"
         >
           <option value="">연도</option>
           {YEARS.map((y) => (
-            <option key={y} value={y}>{y}년</option>
+            <option key={y} value={String(y)}>{y}년</option>
           ))}
         </select>
 
         <select
           className={selectClass}
-          value={month ?? ''}
-          onChange={(e) => update(year ?? '', e.target.value)}
+          value={month}
+          onChange={(e) => setMonth(e.target.value)}
           aria-label="입양 월"
         >
           <option value="">월</option>
