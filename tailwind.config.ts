@@ -16,8 +16,8 @@ const config: Config = {
         "soft-brown": "#C4A882",
       },
       fontFamily: {
-        serif: ["Jua", "Gowun Dodum", "sans-serif"],
-        sans: ["Gowun Dodum", "Nunito", "system-ui", "sans-serif"],
+        serif: ["Pretendard Variable", "Pretendard", "sans-serif"],
+        sans: ["Pretendard Variable", "Pretendard", "system-ui", "sans-serif"],
       },
       borderRadius: {
         "2xl": "16px",
