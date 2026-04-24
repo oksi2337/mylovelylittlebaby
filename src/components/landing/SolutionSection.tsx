@@ -3,6 +3,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import Link from 'next/link';
+import React from 'react';
 
 const CARDS: { icon: string; iconBg: string; title: string; desc: React.ReactNode }[] = [
   {
