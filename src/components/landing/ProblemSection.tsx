@@ -43,7 +43,7 @@ export default function ProblemSection() {
             style={{ backgroundColor: 'rgba(196,168,130,0.12)' }}
           >
             <span className="text-[13px]">ⓘ</span>
-            <span>유기견 보호자라면 한 번쯤 느꼈을 것</span>
+            <span>유기동물 보호자라면 한 번쯤 느꼈을 것</span>
           </div>
 
           <h2 className="font-serif text-[28px] md:text-[40px] text-deep-brown font-semibold leading-[1.3] tracking-tight">
