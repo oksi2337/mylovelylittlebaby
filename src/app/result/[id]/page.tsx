@@ -211,7 +211,7 @@ export default function ResultPage() {
             >
               <span className="text-xl shrink-0" aria-hidden="true">🐾</span>
               <p className="text-warm-brown text-sm font-medium leading-snug">
-                이 구매의 2%가 유기동물 보호를 위해
+                이 구매의 2%가 유기동물 보호에 기부됩니다.
                 <br />
                 <span className="font-normal text-soft-brown">함께해 주셔서 감사해요.</span>
               </p>
