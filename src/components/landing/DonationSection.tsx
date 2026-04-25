@@ -5,8 +5,8 @@ import { useRef } from 'react';
 
 const STATS = [
   { value: '2%', label: '모든 결제의 기부 비율' },
-  { value: '월 1회', label: '기부 리포트 발행' },
   { value: '기부', label: '유기동물 보호에 사용' },
+  { value: '월 1회', label: '기부 리포트 발행' },
 ];
 
 const ease = [0.22, 1, 0.36, 1] as const;
