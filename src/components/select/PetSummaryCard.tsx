@@ -9,16 +9,17 @@ const TYPE_LABEL: Record<string, string> = {
 };
 
 export default function PetSummaryCard() {
-  const { petInfo, photoPreviewUrl } = usePetStore();
+  const { petInfo, photoPreviewUrls } = usePetStore();
+  const firstPhoto = photoPreviewUrls[0];
 
   return (
     <div className="bg-white border border-beige rounded-3xl shadow-card px-5 py-4 flex items-center gap-4">
       {/* Photo thumbnail */}
       <div className="w-14 h-14 rounded-2xl overflow-hidden flex-shrink-0 bg-beige">
-        {photoPreviewUrl ? (
+        {firstPhoto ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={photoPreviewUrl}
+            src={firstPhoto}
             alt={petInfo.name || '반려동물'}
             className="w-full h-full object-cover"
           />
@@ -40,7 +41,6 @@ export default function PetSummaryCard() {
           </span>
         </div>
 
-        {/* Personality chips */}
         {petInfo.personality.length > 0 ? (
           <div className="flex flex-wrap gap-1.5">
             {petInfo.personality.map((trait) => (
