@@ -49,7 +49,7 @@ function FloatQuote({ text, index }: { text: string; index: number }) {
 }
 
 function ExampleCard({
-  emoji,
+  img,
   name,
   desc,
   rotate,
@@ -65,11 +65,9 @@ function ExampleCard({
       style={{ zIndex: z, translateX: x }}
       className="relative flex-shrink-0 w-44 md:w-52"
     >
-      {/* Photo placeholder */}
-      <div className="rounded-[20px] overflow-hidden shadow-hover border-[3px] border-white">
-        <div className="aspect-[3/4] bg-gradient-to-br from-beige via-soft-brown/25 to-warm-brown/20 flex flex-col items-center justify-center gap-2">
-          <span className="text-7xl select-none">{emoji}</span>
-          <span className="text-[10px] text-soft-brown uppercase tracking-widest font-medium">Baby version</span>
+      <div className="rounded-[20px] overflow-hidden shadow-hover border-[3px] border-white relative">
+        <div className="aspect-[3/4] relative">
+          <Image src={img} alt={name} fill className="object-cover" sizes="208px" />
         </div>
         <div className="absolute inset-x-0 bottom-0 px-4 py-3 bg-gradient-to-t from-deep-brown/70 to-transparent">
           <p className="text-white text-sm font-semibold">{name}</p>
