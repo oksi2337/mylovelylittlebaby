@@ -101,7 +101,7 @@ export default function HeroSection() {
             className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-sm font-medium"
             style={{ backgroundColor: 'rgba(139,102,81,0.11)', color: '#7a5540' }}
           >
-            ♡&nbsp;수익의 2%가 유기동물 보호에 기부됩니다
+            ♡&nbsp;수익의 2%가 유기동물 보호를 위해 기부됩니다
           </span>
         </motion.div>
 
