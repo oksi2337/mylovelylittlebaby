@@ -121,9 +121,9 @@ export default function ResultExampleSection() {
             이런 결과를 받아보실 수 있어요
           </h2>
           <p className="text-soft-brown mt-4 text-base max-w-md mx-auto leading-relaxed">
-            현재 사진 한 장으로 아기 시절 이미지와
-            <br className="hidden sm:block" />
-            감성 스토리를 함께 받아보세요
+            현재 사진 3장과 아이에 대한 정보를 바탕으로
+            <br />
+            아기시절 이미지를 받아보세요
           </p>
         </motion.div>
 
