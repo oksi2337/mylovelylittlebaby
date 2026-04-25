@@ -319,6 +319,7 @@ export default function PetInfoForm() {
       isAdopted:        petInfo.isAdopted,
       adoptedAt:        petInfo.adoptedAt,
       personality:      petInfo.personality,
+      favoritePlace:    petInfo.favoritePlace,
       messageFromOwner: petInfo.messageFromOwner,
     },
     mode: 'onTouched',
