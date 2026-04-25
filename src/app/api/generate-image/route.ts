@@ -44,12 +44,16 @@ function buildImagePrompt(petInfo: PetInfo, visualDescription?: string): string 
   const species = petInfo.type === 'dog' ? 'puppy' : petInfo.type === 'cat' ? 'kitten' : 'baby animal';
   const breed = petInfo.breed || 'mixed breed';
   const appearanceLine = visualDescription ? `Appearance based on the adult: ${visualDescription}` : '';
+  const background = petInfo.favoritePlace
+    ? PLACE_BACKGROUND[petInfo.favoritePlace]
+    : 'soft neutral background, warm natural light, shallow depth of field';
 
   return `A warm, photorealistic baby ${species} portrait.
 Breed: ${breed}.
 ${appearanceLine}
 The subject should look like a very young version (8-12 weeks old) of an adult ${petInfo.type}.
-Soft, natural lighting. Warm color temperature. Slightly blurry background (bokeh).
+Background: ${background}.
+Soft, natural lighting. Warm color temperature.
 Documentary-style photography, like a real family photo album.
 The composition should feel tender, intimate, and nostalgic.
 NOT a cartoon, illustration, or fantasy. Must look like a real photograph.
