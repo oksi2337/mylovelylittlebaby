@@ -51,7 +51,6 @@ function FloatQuote({ text, index }: { text: string; index: number }) {
 function ExampleCard({
   img,
   name,
-  desc,
   rotate,
   z,
   x,
