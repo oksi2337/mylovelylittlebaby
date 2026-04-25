@@ -103,20 +103,27 @@ export default function HowItWorksSection() {
             </span>
           </motion.div>
 
-          {/* Result circle */}
+          {/* Result card */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.55, delay: 0.55, ease }}
-            className="flex-shrink-0 flex justify-center"
+            initial={{ opacity: 0, y: 32 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.55, ease }}
+            className="relative flex-1"
           >
-            <div className="w-36 h-36 md:w-40 md:h-40 rounded-full border-2 border-warm-brown bg-white shadow-card flex flex-col items-center justify-center text-center gap-1 px-3">
-              <span className="text-2xl mb-0.5">{RESULT.icon}</span>
-              {RESULT.title.map((line, i) => (
-                <p key={i} className="font-serif text-[0.72rem] text-deep-brown font-semibold leading-tight">
-                  {line}
+            <div className="relative z-10 bg-white rounded-3xl p-6 shadow-card border border-soft-brown/10 flex md:flex-col gap-5 md:gap-4 items-start md:items-center text-left md:text-center h-full">
+              <div className="flex-shrink-0 flex md:flex-col items-center gap-2">
+                <div className="w-11 h-11 rounded-full bg-warm-brown flex items-center justify-center text-white font-bold text-sm">
+                  🎁
+                </div>
+              </div>
+              <div>
+                <h3 className="font-serif text-[1rem] md:text-[1.05rem] text-deep-brown font-semibold mb-2 leading-snug">
+                  {RESULT.title}
+                </h3>
+                <p className="text-soft-brown text-[0.875rem] leading-[1.85]">
+                  {RESULT.desc}
                 </p>
-              ))}
+              </div>
             </div>
           </motion.div>
 
