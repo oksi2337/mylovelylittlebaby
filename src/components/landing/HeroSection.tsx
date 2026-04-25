@@ -9,9 +9,9 @@ import Button from '@/components/ui/Button';
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const EXAMPLE_CARDS = [
-  { img: '/examples/리트리버아기.jpg', name: '초코', desc: '리트리버 · 아기 시절', rotate: -5, z: 10, x: -8 },
-  { img: '/examples/고양이아기.jpg',   name: '나비', desc: '고양이 · 아기 시절',   rotate: 0,  z: 20, x: 0  },
-  { img: '/examples/말티즈아기.jpg',   name: '뭉치', desc: '말티즈 · 아기 시절',   rotate: 5,  z: 10, x: 8  },
+  { img: '/examples/리트리버아기.jpg', name: '모찌', rotate: -5, z: 10, x: -8 },
+  { img: '/examples/고양이아기.jpg',   name: '치즈', rotate: 0,  z: 20, x: 0  },
+  { img: '/examples/말티즈아기.jpg',   name: '코코', rotate: 5,  z: 10, x: 8  },
 ];
 
 const QUOTES = [
