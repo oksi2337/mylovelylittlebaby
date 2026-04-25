@@ -26,7 +26,7 @@ export default function DonationBadge({ className, size = 'md' }: DonationBadgeP
       {size === 'sm' ? (
         <span>2% 기부</span>
       ) : (
-        <span>이 구매의 2%가 유기동물 보호에 기부됩니다</span>
+        <span>이 구매의 2%가 유기동물 보호를 위해</span>
       )}
     </span>
   );
