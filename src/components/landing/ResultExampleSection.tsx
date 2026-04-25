@@ -2,14 +2,15 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import Image from 'next/image';
 
 const RESULTS = [
   {
     name: '초코',
-    breed: '믹스견 · 5살',
+    breed: '푸들 · 5살',
     quote: '처음 이 눈빛을 봤을 때부터 운명이었어요.',
-    beforeEmoji: '🐕',
-    afterEmoji: '🐶',
+    beforeImg: '/examples/푸들성견.jpg',
+    afterImg: '/examples/푸들아기.jpg',
     beforeLabel: '현재',
     afterLabel: '아기 시절 (AI 복원)',
   },
@@ -17,8 +18,8 @@ const RESULTS = [
     name: '나비',
     breed: '코리안 숏헤어 · 3살',
     quote: '이런 모습이었을 거라고, 상상만 했었는데.',
-    beforeEmoji: '🐈',
-    afterEmoji: '🐱',
+    beforeImg: '/examples/고양이성묘.jpg',
+    afterImg: '/examples/고양이아기2.jpg',
     beforeLabel: '현재',
     afterLabel: '아기 시절 (AI 복원)',
   },
@@ -26,28 +27,21 @@ const RESULTS = [
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-function ImagePlaceholder({
-  emoji,
+function ImageCard({
+  src,
   label,
   accent,
 }: {
-  emoji: string;
+  src: string;
   label: string;
   accent?: boolean;
 }) {
   return (
     <div className="flex-1 flex flex-col gap-1.5">
-      <div
-        className={[
-          'aspect-square rounded-2xl overflow-hidden flex flex-col items-center justify-center gap-2',
-          accent
-            ? 'bg-gradient-to-br from-warm-brown/15 via-beige to-soft-brown/20'
-            : 'bg-gradient-to-br from-beige to-soft-brown/15',
-        ].join(' ')}
-      >
-        <span className="text-5xl select-none">{emoji}</span>
+      <div className="aspect-square rounded-2xl overflow-hidden relative">
+        <Image src={src} alt={label} fill className="object-cover" sizes="200px" />
         {accent && (
-          <span className="text-[10px] text-warm-brown/70 uppercase tracking-widest font-medium">
+          <span className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] text-white/90 uppercase tracking-widest font-medium bg-warm-brown/60 px-2 py-0.5 rounded-full whitespace-nowrap">
             AI Restored
           </span>
         )}
@@ -77,14 +71,13 @@ function ResultCard({
     >
       {/* Before / After images */}
       <div className="p-5 pb-0 flex gap-3">
-        <ImagePlaceholder emoji={result.beforeEmoji} label={result.beforeLabel} />
-        {/* Arrow divider */}
+        <ImageCard src={result.beforeImg} label={result.beforeLabel} />
         <div className="flex items-center flex-shrink-0 pb-5">
           <div className="w-7 h-7 rounded-full bg-warm-brown/10 flex items-center justify-center text-warm-brown text-sm">
             →
           </div>
         </div>
-        <ImagePlaceholder emoji={result.afterEmoji} label={result.afterLabel} accent />
+        <ImageCard src={result.afterImg} label={result.afterLabel} accent />
       </div>
 
       {/* Info */}
@@ -94,7 +87,6 @@ function ResultCard({
             <span className="font-serif text-deep-brown font-semibold">{result.name}</span>
             <span className="text-soft-brown text-xs ml-2">{result.breed}</span>
           </div>
-          {/* Donation badge */}
           <span
             className="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-full font-medium"
             style={{ backgroundColor: 'rgba(139,102,81,0.09)', color: '#7a5540' }}
@@ -135,7 +127,7 @@ export default function ResultExampleSection() {
           </p>
         </motion.div>
 
-        {/* Cards: mobile = vertical, desktop = horizontal */}
+        {/* Cards */}
         <div className="flex flex-col md:flex-row gap-5 md:gap-6">
           {RESULTS.map((result, i) => (
             <ResultCard key={result.name} result={result} index={i} inView={inView} />
