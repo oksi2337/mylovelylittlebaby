@@ -26,7 +26,8 @@ const STEPS = [
 
 const RESULT = {
   icon: '🎁',
-  title: ['이미지 +', '감성 스토리', '수령'],
+  title: '이미지 + 감성 스토리 수령',
+  desc: '복원 이미지와 따뜻한 감성 스토리를 함께 받아보세요.',
 };
 
 const ease = [0.22, 1, 0.36, 1] as const;
