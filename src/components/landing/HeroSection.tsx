@@ -177,9 +177,8 @@ export default function HeroSection() {
                 transition={{ duration: 0.6, delay: 0.7 + i * 0.1, ease }}
               >
                 <div className="rounded-[20px] overflow-hidden shadow-hover border-[3px] border-white relative">
-                  <div className="aspect-[3/4] bg-gradient-to-br from-beige via-soft-brown/25 to-warm-brown/20 flex flex-col items-center justify-center gap-2">
-                    <span className="text-6xl select-none">{card.emoji}</span>
-                    <span className="text-[10px] text-soft-brown uppercase tracking-widest font-medium">Baby version</span>
+                  <div className="aspect-[3/4] relative">
+                    <Image src={card.img} alt={card.name} fill className="object-cover" sizes="176px" />
                   </div>
                   <div className="absolute inset-x-0 bottom-0 px-3 py-2.5 bg-gradient-to-t from-deep-brown/70 to-transparent">
                     <p className="text-white text-sm font-semibold">{card.name}</p>
