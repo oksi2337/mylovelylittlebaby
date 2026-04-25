@@ -9,8 +9,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { petInfoSchema, type PetInfoFormValues } from '@/lib/schema';
 import { usePetStore } from '@/store/petStore';
-import { PERSONALITY_OPTIONS } from '@/types';
-import type { PetType, Gender } from '@/types';
+import { PERSONALITY_OPTIONS, FAVORITE_PLACE_OPTIONS } from '@/types';
+import type { PetType, Gender, FavoritePlace } from '@/types';
 
 // ─── Micro components ─────────────────────────────────────────────────────────
 
