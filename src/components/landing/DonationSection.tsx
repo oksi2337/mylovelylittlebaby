@@ -45,8 +45,8 @@ export default function DonationSection() {
             </h2>
             <p className="text-soft-brown text-[0.95rem] leading-[1.9] max-w-lg mx-auto">
               BabyPet을 이용할 때마다 유기동물 보호 단체에 기부하시게 됩니다.
-              아이의 아기 시절을 만나면서 동시에 또 다른 아이들의 미래를
-              함께 만들어가세요.
+              <br />
+              아이의 아기 시절을 만나면서 동시에 또 다른 아이들의 미래를 함께 만들어가세요.
             </p>
           </motion.div>
 
