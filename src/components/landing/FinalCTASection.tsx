@@ -74,7 +74,7 @@ export default function FinalCTASection() {
           transition={{ duration: 0.5, delay: 0.48 }}
           className="mt-5 text-soft-brown/60 text-xs"
         >
-          🐾 구매 시 수익의 2%가 유기동물 보호를 위해
+          🐾 구매 시 수익의 2%가 유기동물 보호에 기부됩니다
         </motion.p>
       </div>
     </section>
