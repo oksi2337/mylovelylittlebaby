@@ -3,14 +3,15 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import Button from '@/components/ui/Button';
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const EXAMPLE_CARDS = [
-  { emoji: '🐕', name: '초코', desc: '믹스견 · 아기 시절', rotate: -5, z: 10, x: -8 },
-  { emoji: '🐈', name: '나비', desc: '코리안 숏헤어 · 생후 6주', rotate: 0, z: 20, x: 0 },
-  { emoji: '🐕', name: '뭉치', desc: '포메라니안 · 아기 시절', rotate: 5, z: 10, x: 8 },
+  { img: '/examples/리트리버아기.jpg', name: '초코', desc: '리트리버 · 아기 시절', rotate: -5, z: 10, x: -8 },
+  { img: '/examples/고양이아기.jpg',   name: '나비', desc: '고양이 · 아기 시절',   rotate: 0,  z: 20, x: 0  },
+  { img: '/examples/말티즈아기.jpg',   name: '뭉치', desc: '말티즈 · 아기 시절',   rotate: 5,  z: 10, x: 8  },
 ];
 
 const QUOTES = [
