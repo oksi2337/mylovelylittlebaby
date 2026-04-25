@@ -110,7 +110,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, delay: 0.18, ease }}
-          className="font-serif text-[28px] md:text-[48px] text-deep-brown font-semibold leading-[1.25] tracking-tight mb-6"
+          className="font-serif text-[36px] md:text-[56px] text-deep-brown font-semibold leading-[1.25] tracking-tight mb-6"
         >
           우리가 만나기 전,
           <br />
@@ -124,9 +124,9 @@ export default function HeroSection() {
           transition={{ duration: 0.7, delay: 0.33, ease }}
           className="text-soft-brown text-base md:text-[1.1rem] leading-[1.85] mb-10 md:mb-12 max-w-md mx-auto"
         >
-          반려동물의 아기 시절을 상상 복원하고,
-          <br className="hidden sm:block" />
-          그 시간을 하나의 이야기로 만들어드립니다.
+          반려동물의 사진을 올리면
+          <br />
+          아기시절을 상상 복원해 드립니다.
         </motion.p>
 
         {/* CTA group */}
