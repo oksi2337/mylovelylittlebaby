@@ -524,7 +524,24 @@ export default function PetInfoForm() {
         <FieldError error={errors.personality} />
       </FieldCard>
 
-      {/* ── 8. 보호자 메시지 ── */}
+      {/* ── 8. 좋아하는 장소 ── */}
+      <FieldCard>
+        <FieldLabel optional>아이가 가장 좋아하는 장소는 어디인가요?</FieldLabel>
+        <p className="text-soft-brown text-xs mb-3 -mt-2">생성되는 사진의 배경으로 반영돼요</p>
+        <Controller
+          name="favoritePlace"
+          control={control}
+          render={({ field }) => (
+            <FavoritePlaceSelector
+              value={field.value as FavoritePlace | undefined}
+              onChange={field.onChange}
+            />
+          )}
+        />
+        <FieldError error={errors.favoritePlace} />
+      </FieldCard>
+
+      {/* ── 9. 보호자 메시지 ── */}
       <FieldCard>
         <div className="flex items-start justify-between mb-3">
           <FieldLabel htmlFor="messageFromOwner" optional>
