@@ -41,7 +41,7 @@ export default function DonationSection() {
             <h2 className="font-serif text-[22px] md:text-[30px] text-deep-brown font-semibold leading-[1.4] mb-4">
               결제 금액의 2%는
               <br />
-              유기동물 보호를 위해
+              유기동물 보호를 위해 기부됩니다
             </h2>
             <p className="text-soft-brown text-[0.95rem] leading-[1.9] max-w-lg mx-auto">
               BabyPet을 이용할 때마다 유기동물 보호 단체에 기부하시게 돼요.
