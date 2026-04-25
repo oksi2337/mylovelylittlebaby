@@ -3,6 +3,7 @@ import { replicate } from '@/lib/replicate';
 import { openai } from '@/lib/openai';
 import { generateId } from '@/lib/utils';
 import type { PetInfo, Plan } from '@/types';
+import { PLACE_BACKGROUND } from '@/types';
 
 const PLAN_IMAGE_COUNT: Record<Plan, number> = {
   free: 1,
