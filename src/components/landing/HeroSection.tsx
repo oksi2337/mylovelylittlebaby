@@ -70,7 +70,6 @@ function ExampleCard({
         </div>
         <div className="absolute inset-x-0 bottom-0 px-4 py-3 bg-gradient-to-t from-deep-brown/70 to-transparent">
           <p className="text-white text-sm font-semibold">{name}</p>
-          <p className="text-white/65 text-[11px]">{desc}</p>
         </div>
       </div>
     </motion.div>
