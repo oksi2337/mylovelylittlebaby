@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { usePetStore } from '@/store/petStore';
 import StepIndicator from '@/components/ui/StepIndicator';
-import PhotoUploader from '@/components/upload/PhotoUploader';
+import PhotoUploader, { MIN_PHOTOS } from '@/components/upload/PhotoUploader';
 import { cn } from '@/lib/utils';
 
 // ─── Guide data ───────────────────────────────────────────────────────────────
@@ -26,8 +26,9 @@ const BAD = [
 
 export default function UploadPage() {
   const router = useRouter();
-  const photoPreviewUrl = usePetStore((s) => s.photoPreviewUrl);
-  const hasPhoto = Boolean(photoPreviewUrl);
+  const photoPreviewUrls = usePetStore((s) => s.photoPreviewUrls);
+  const count = photoPreviewUrls.length;
+  const hasEnough = count >= MIN_PHOTOS;
 
   return (
     <div className="min-h-screen bg-cream">
@@ -57,10 +58,10 @@ export default function UploadPage() {
         {/* ── Title ── */}
         <div className="mb-8">
           <h1 className="font-serif text-2xl md:text-[1.75rem] text-deep-brown font-semibold leading-snug mb-2">
-            아이의 사진을 올려주세요
+            아이의 사진을 3장 이상 올려주세요
           </h1>
           <p className="text-soft-brown text-[0.95rem] leading-relaxed">
-            얼굴이 잘 보이는 사진일수록 더 자연스럽게 복원돼요.
+            다양한 각도의 사진일수록 아기 시절을 더 정확하게 복원할 수 있어요.
           </p>
         </div>
 
@@ -98,12 +99,12 @@ export default function UploadPage() {
         <div className="mt-6">
           <button
             type="button"
-            disabled={!hasPhoto}
+            disabled={!hasEnough}
             onClick={() => router.push('/info')}
             className={cn(
               'w-full py-4 rounded-full text-base font-medium',
               'transition-all duration-200',
-              hasPhoto
+              hasEnough
                 ? [
                     'bg-warm-brown text-white',
                     'hover:bg-deep-brown hover:scale-[1.01] hover:shadow-hover',
@@ -111,9 +112,13 @@ export default function UploadPage() {
                   ].join(' ')
                 : 'bg-soft-brown/20 text-soft-brown/50 cursor-not-allowed',
             )}
-            aria-disabled={!hasPhoto}
+            aria-disabled={!hasEnough}
           >
-            {hasPhoto ? '다음으로 →' : '사진을 먼저 선택해주세요'}
+            {hasEnough
+              ? '다음으로 →'
+              : count === 0
+              ? '사진을 먼저 선택해주세요'
+              : `사진 ${MIN_PHOTOS - count}장을 더 추가해주세요`}
           </button>
         </div>
       </div>
