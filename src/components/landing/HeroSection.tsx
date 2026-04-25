@@ -180,7 +180,6 @@ export default function HeroSection() {
                   </div>
                   <div className="absolute inset-x-0 bottom-0 px-3 py-2.5 bg-gradient-to-t from-deep-brown/70 to-transparent">
                     <p className="text-white text-sm font-semibold">{card.name}</p>
-                    <p className="text-white/65 text-[11px]">{card.desc}</p>
                   </div>
                 </div>
               </motion.div>
