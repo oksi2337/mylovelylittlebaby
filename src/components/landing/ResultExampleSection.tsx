@@ -123,7 +123,7 @@ export default function ResultExampleSection() {
           <p className="text-soft-brown mt-4 text-base max-w-md mx-auto leading-relaxed">
             현재 사진 3장과 아이에 대한 정보를 바탕으로
             <br />
-            아기시절 이미지를 받아보세요
+            아기시절 이미지를 생생하게 만들어드립니다
           </p>
         </motion.div>
 
