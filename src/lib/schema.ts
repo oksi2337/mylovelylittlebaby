@@ -12,6 +12,7 @@ export const petInfoSchema = z.object({
   isAdopted: z.boolean(),
   adoptedAt: z.string().optional(),
   personality: z.array(z.string()).max(3),
+  favoritePlace: z.enum(['park', 'window', 'sofa', 'garden', 'kitchen', 'unknown'] as const).optional(),
   messageFromOwner: z.string().max(200, '200자 이하로 입력해주세요').optional(),
 });
 
