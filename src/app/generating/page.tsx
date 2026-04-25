@@ -6,14 +6,34 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { usePetStore } from '@/store/petStore';
 
+// 클라이언트에서 File → 512px JPEG base64로 리사이즈
+async function resizeToBase64(file: File, maxSize = 512): Promise<string> {
+  const url = URL.createObjectURL(file);
+  const img = new Image();
+  await new Promise<void>((resolve, reject) => {
+    img.onload = () => resolve();
+    img.onerror = reject;
+    img.src = url;
+  });
+  const ratio = Math.min(maxSize / img.width, maxSize / img.height, 1);
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.round(img.width * ratio);
+  canvas.height = Math.round(img.height * ratio);
+  canvas.getContext('2d')!.drawImage(img, 0, 0, canvas.width, canvas.height);
+  URL.revokeObjectURL(url);
+  return canvas.toDataURL('image/jpeg', 0.85);
+}
+
 export default function GeneratingPage() {
   const router = useRouter();
-  const { photoPreviewUrl, petInfo, selectedPlan, setResult } = usePetStore();
+  const { photos, photoPreviewUrls, petInfo, selectedPlan, setResult } = usePetStore();
   const [msgIndex, setMsgIndex] = useState(0);
   const [error, setError] = useState(false);
   const started = useRef(false);
 
   const name = petInfo.name || '소중한 아이';
+  const previewUrl = photoPreviewUrls[0] ?? null;
+
   const messages = [
     '아이의 작은 시절을 조심스럽게 상상하고 있어요.',
     '털빛과 눈빛을 기억하며 복원 중입니다.',
@@ -24,11 +44,16 @@ export default function GeneratingPage() {
   async function generate() {
     setError(false);
     try {
+      // File 객체가 있으면 사진을 base64로 변환해서 API에 전달
+      const photoBase64s: string[] = photos.length > 0
+        ? await Promise.all(photos.map((f) => resizeToBase64(f)))
+        : [];
+
       const [imageData, storyData] = await Promise.all([
         fetch('/api/generate-image', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ petInfo, plan: selectedPlan }),
+          body: JSON.stringify({ petInfo, plan: selectedPlan, photoBase64s }),
         }).then((r) => r.json()),
         fetch('/api/generate-story', {
           method: 'POST',
@@ -44,7 +69,6 @@ export default function GeneratingPage() {
       const { images, id } = imageData as { images: string[]; id: string };
       const { story } = storyData;
 
-      // Store story as JSON string; result page deserializes it
       setResult(images, typeof story === 'string' ? story : JSON.stringify(story), id);
       router.push(`/result/${id}`);
     } catch (err) {
@@ -53,21 +77,21 @@ export default function GeneratingPage() {
     }
   }
 
-  // Run once on mount; ref guards against React StrictMode double-fire
+  // StrictMode 이중 실행 방지
   useEffect(() => {
     if (started.current) return;
     started.current = true;
     generate();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Cycle messages while loading
+  // 메시지 순환
   useEffect(() => {
     if (error) return;
     const id = setInterval(() => setMsgIndex((i) => (i + 1) % messages.length), 3500);
     return () => clearInterval(id);
   }, [error, messages.length]);
 
-  // ── Error state ─────────────────────────────────────────────────────────────
+  // ── 에러 상태 ─────────────────────────────────────────────────────────────
 
   if (error) {
     return (
@@ -101,7 +125,7 @@ export default function GeneratingPage() {
     );
   }
 
-  // ── Loading state ────────────────────────────────────────────────────────────
+  // ── 로딩 상태 ─────────────────────────────────────────────────────────────
 
   return (
     <div className="min-h-screen bg-cream flex flex-col items-center justify-center px-4 relative overflow-hidden">
@@ -111,8 +135,7 @@ export default function GeneratingPage() {
         style={{
           width: 500,
           height: 500,
-          background:
-            'radial-gradient(circle, rgba(139,102,81,0.07) 0%, transparent 68%)',
+          background: 'radial-gradient(circle, rgba(139,102,81,0.07) 0%, transparent 68%)',
         }}
         animate={{ scale: [1, 1.09, 1] }}
         transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
@@ -122,8 +145,7 @@ export default function GeneratingPage() {
         style={{
           width: 280,
           height: 280,
-          background:
-            'radial-gradient(circle, rgba(139,102,81,0.11) 0%, transparent 65%)',
+          background: 'radial-gradient(circle, rgba(139,102,81,0.11) 0%, transparent 65%)',
         }}
         animate={{ scale: [1, 1.14, 1] }}
         transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
@@ -132,7 +154,7 @@ export default function GeneratingPage() {
       {/* Central content */}
       <div className="relative z-10 flex flex-col items-center text-center max-w-sm w-full">
 
-        {/* Pet photo with pulsing ring */}
+        {/* 첫 번째 사진 + pulsing ring */}
         <div className="relative mb-9">
           <motion.div
             className="absolute -inset-3 rounded-full border border-warm-brown/25"
@@ -140,10 +162,10 @@ export default function GeneratingPage() {
             transition={{ duration: 2.4, repeat: Infinity, ease: 'easeOut' }}
           />
           <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-white shadow-[0_8px_32px_rgba(139,102,81,0.22)]">
-            {photoPreviewUrl ? (
+            {previewUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
-                src={photoPreviewUrl}
+                src={previewUrl}
                 alt={name}
                 className="w-full h-full object-cover"
               />
