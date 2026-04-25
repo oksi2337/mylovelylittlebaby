@@ -1,6 +1,7 @@
 export type PetType = 'dog' | 'cat' | 'other';
 export type Gender = 'male' | 'female';
 export type Plan = 'free' | 'basic' | 'premium' | 'memory';
+export type FavoritePlace = 'park' | 'window' | 'sofa' | 'garden' | 'kitchen' | 'unknown';
 
 export interface PetInfo {
   name: string;
@@ -11,8 +12,27 @@ export interface PetInfo {
   isAdopted: boolean;
   adoptedAt?: string;
   personality: string[];
+  favoritePlace?: FavoritePlace;
   messageFromOwner: string;
 }
+
+export const FAVORITE_PLACE_OPTIONS: { value: FavoritePlace; label: string; icon: string }[] = [
+  { value: 'park',    label: '공원 · 산책로', icon: '🌳' },
+  { value: 'window',  label: '창가 · 햇볕',   icon: '☀️' },
+  { value: 'sofa',    label: '소파 · 침대',   icon: '🛋️' },
+  { value: 'garden',  label: '마당 · 정원',   icon: '🌸' },
+  { value: 'kitchen', label: '주방 · 부엌',   icon: '🏡' },
+  { value: 'unknown', label: '잘 모르겠어요', icon: '🐾' },
+];
+
+export const PLACE_BACKGROUND: Record<FavoritePlace, string> = {
+  park:    'outdoor park background, lush green grass, warm sunlight filtering through trees, shallow depth of field',
+  window:  'cozy indoor setting, warm golden sunlight streaming through a window, soft gauzy curtains in background',
+  sofa:    'cozy living room background, soft sofa or couch visible, warm ambient indoor lighting, homey atmosphere',
+  garden:  'blooming garden background, soft pastel flowers and greenery, gentle dappled outdoor sunlight',
+  kitchen: 'warm homey kitchen background, soft natural indoor light, wooden surfaces, cozy domestic setting',
+  unknown: 'soft neutral background, warm natural light, shallow depth of field',
+};
 
 export interface PlanDetail {
   id: Plan;
