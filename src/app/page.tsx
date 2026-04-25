@@ -4,7 +4,6 @@ import ProblemSection from '@/components/landing/ProblemSection';
 import SolutionSection from '@/components/landing/SolutionSection';
 import ResultExampleSection from '@/components/landing/ResultExampleSection';
 import HowItWorksSection from '@/components/landing/HowItWorksSection';
-import AdoptionSection from '@/components/landing/AdoptionSection';
 import PricingSection from '@/components/landing/PricingSection';
 import DonationSection from '@/components/landing/DonationSection';
 import FinalCTASection from '@/components/landing/FinalCTASection';
@@ -19,9 +18,8 @@ export default function LandingPage() {
         <SolutionSection />
         <ResultExampleSection />
         <HowItWorksSection />
-        <AdoptionSection />
-        <PricingSection />
         <DonationSection />
+        <PricingSection />
         <FinalCTASection />
       </main>
 
