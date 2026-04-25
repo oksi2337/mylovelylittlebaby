@@ -259,6 +259,41 @@ function PersonalityChips({
   );
 }
 
+// ─── Favorite Place Selector ──────────────────────────────────────────────────
+
+function FavoritePlaceSelector({
+  value,
+  onChange,
+}: {
+  value?: FavoritePlace;
+  onChange: (v: FavoritePlace) => void;
+}) {
+  return (
+    <div className="grid grid-cols-3 gap-2">
+      {FAVORITE_PLACE_OPTIONS.map(({ value: opt, label, icon }) => {
+        const selected = value === opt;
+        return (
+          <button
+            key={opt}
+            type="button"
+            onClick={() => onChange(opt)}
+            className={cn(
+              'flex flex-col items-center gap-1.5 py-3.5 rounded-2xl border text-sm font-medium',
+              'transition-all duration-150 active:scale-[0.97]',
+              selected
+                ? 'bg-beige border-warm-brown text-warm-brown shadow-card'
+                : 'bg-white border-soft-brown/30 text-soft-brown hover:border-warm-brown/50 hover:text-deep-brown',
+            )}
+          >
+            <span className="text-xl leading-none">{icon}</span>
+            <span className="text-[0.75rem] leading-tight text-center">{label}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 // ─── Main Form ────────────────────────────────────────────────────────────────
 
 export default function PetInfoForm() {
