@@ -3,8 +3,8 @@ import { persist } from 'zustand/middleware';
 import type { PetInfo, Plan } from '@/types';
 
 interface PetStore {
-  photo: File | null;
-  photoPreviewUrl: string | null;
+  photos: File[];
+  photoPreviewUrls: string[];
   petInfo: PetInfo;
   selectedPlan: Plan;
 
@@ -12,8 +12,9 @@ interface PetStore {
   generatedStory: string;
   resultId: string | null;
 
-  setPhoto: (file: File) => void;
-  clearPhoto: () => void;
+  addPhotos: (files: File[]) => void;
+  removePhoto: (index: number) => void;
+  clearPhotos: () => void;
   setPetInfo: (info: Partial<PetInfo>) => void;
   setSelectedPlan: (plan: Plan) => void;
   setResult: (images: string[], story: string, id: string) => void;
@@ -35,8 +36,8 @@ const defaultPetInfo: PetInfo = {
 export const usePetStore = create<PetStore>()(
   persist(
     (set) => ({
-      photo: null,
-      photoPreviewUrl: null,
+      photos: [],
+      photoPreviewUrls: [],
       petInfo: defaultPetInfo,
       selectedPlan: 'basic',
 
@@ -44,12 +45,33 @@ export const usePetStore = create<PetStore>()(
       generatedStory: '',
       resultId: null,
 
-      setPhoto: (file: File) => {
-        const url = URL.createObjectURL(file);
-        set({ photo: file, photoPreviewUrl: url });
+      addPhotos: (files: File[]) => {
+        set((state) => {
+          const newUrls = files.map((f) => URL.createObjectURL(f));
+          return {
+            photos: [...state.photos, ...files],
+            photoPreviewUrls: [...state.photoPreviewUrls, ...newUrls],
+          };
+        });
       },
 
-      clearPhoto: () => set({ photo: null, photoPreviewUrl: null }),
+      removePhoto: (index: number) => {
+        set((state) => {
+          const newPhotos = [...state.photos];
+          const newUrls = [...state.photoPreviewUrls];
+          URL.revokeObjectURL(newUrls[index]);
+          newPhotos.splice(index, 1);
+          newUrls.splice(index, 1);
+          return { photos: newPhotos, photoPreviewUrls: newUrls };
+        });
+      },
+
+      clearPhotos: () => {
+        set((state) => {
+          state.photoPreviewUrls.forEach((url) => URL.revokeObjectURL(url));
+          return { photos: [], photoPreviewUrls: [] };
+        });
+      },
 
       setPetInfo: (info: Partial<PetInfo>) =>
         set((state) => ({ petInfo: { ...state.petInfo, ...info } })),
@@ -61,8 +83,8 @@ export const usePetStore = create<PetStore>()(
 
       reset: () =>
         set({
-          photo: null,
-          photoPreviewUrl: null,
+          photos: [],
+          photoPreviewUrls: [],
           petInfo: defaultPetInfo,
           selectedPlan: 'basic',
           generatedImages: [],
@@ -75,7 +97,7 @@ export const usePetStore = create<PetStore>()(
       partialize: (state) => ({
         petInfo: state.petInfo,
         selectedPlan: state.selectedPlan,
-        photoPreviewUrl: state.photoPreviewUrl,
+        photoPreviewUrls: state.photoPreviewUrls,
         generatedImages: state.generatedImages,
         generatedStory: state.generatedStory,
         resultId: state.resultId,
